@@ -13,6 +13,9 @@ This TS app
 
 ## Packages Used
 
+- fs // npm i @types/node
+-
+
 ## Executing App
 
 1. npm install -g typescript ts-node // When installed, TS does not show up on package.json
@@ -24,18 +27,18 @@ This TS app
       // concurrently for running TSC and node at the same time
    2. tsc --init // creates tsconfig.json file (this should be in root dir)
 5. On tsconfig.json file, add (or uncomment) the lines
-<!-- "rootDir": "./src",         // tells TSC this is the root (source code) dir
-"outDir": "./build",        // tells TSC this is the compiled code dir -->
+   <!-- "rootDir": "./src",         // tells TSC this is the root (source code) dir
+   "outDir": "./build",        // tells TSC this is the compiled code dir -->
 6. Package.json Scripts - write the following script
-<!-- "scripts": {
-"start:build": "tsc -w",
-"start:run": "nodemon build/index.js",
-"start": "concurrently npm:start:*"
-}, -->
+   <!-- "scripts": {
+   "start:build": "tsc -w",
+   "start:run": "nodemon build/index.js",
+   "start": "concurrently npm:start:*"
+   }, -->
 7. On git bash:
    1. npm run start:build // or “tsc -w”
       1. You need to build js app first before running npm start; node js tries to run “start:run” before index.js is finished being created
-   1. npm start // runs every npm start:<pattern> scripts
+   1. npm start // runs every npm start:pattern scripts
 
 ## Folder Structure
 
