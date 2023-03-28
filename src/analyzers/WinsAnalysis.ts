@@ -21,11 +21,3 @@ export class WinsAnalysis implements Analyzer {
     return `Team ${this.teamName} won ${wins} games`;
   }
 }
-
-// const csvReader = new CsvReader("football.csv")
-// const matchReader = new MatchReader(csvReader)
-// matchReader.load()
-
-// const winsAnalysis = new WinsAnalysis("Man United")
-// winsAnalysis.run(matchReader.matches)
-// const summary = new Summary(winsAnalysis)

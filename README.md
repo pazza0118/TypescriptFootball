@@ -1,25 +1,29 @@
 # Typescript Football Data Analysis
 
-This TS app
+This TS app analyzes football match data from a csv file and reports the wins of a team in html or console format.
 
 ## Table of Contents
 
 - [Packages Used](#packages-used)
 - [Executing App](#executing-app)
-- [Folder Structure](#folder-structure)
+- [Code Explanation](#code-explanation)
+  - [Starter File](#starter-file)
+  - [Class Files](#class-files)
+  - [Helper Files](#helper-files)
+  - [Old Files](#old-files)
+
 - [Challenge and Solution](#challenge-and-solution)
-- [Functions](#functions)
-- [Deployment](#deployment)
 
 ## Packages Used
 
 - fs // npm i @types/node
--
+- concurrently
+- nodemon
 
 ## Executing App
 
-1. npm install -g typescript ts-node // When installed, TS does not show up on package.json
-   1. tsc -v // to check if TS is installed
+1. npm install -g typescript ts-node 
+   1. tsc -v // to check if TS is already installed
 2. npm init -y // Creates node.js project
 3. Create build folder, src folder, add index.ts file inside src folder
 4. On git bash, enter:
@@ -40,14 +44,42 @@ This TS app
       1. You need to build js app first before running npm start; node js tries to run “start:run” before index.js is finished being created
    1. npm start // runs every npm start:pattern scripts
 
-## Folder Structure
+## Code Explanation 
+The app has several classes which are used to extract, convert, analyze, and generate reports based on csv file and the name of team
+that is being analyzed.
 
-Sort (Root Directory)
+All these classes are instantiated (via static methods) on index.ts 
 
-- build
-  - the compiled js files
-- ## src
+### Starter File
+- index.ts : Calls MatchReader's & Summary's static methods to start the app
+
+### Class Files
+- CsvReader.ts : Extracts data from csv file
+- MatchReader.ts : Converts extracted data to data types outlined in MatchData.ts
+- Summary.ts : A parent class referencing any class meeting the interface Analyzer and OutputTarget (so WinsAnalysis.ts, ConsoleReport.ts, HtmlReport.ts). This is the class where user chooses the analysis and report format.
+- WinsAnalysis.ts : Takes converted data & team name, analyze the number of wins
+- ConsoleReport.ts : Gives console report given report content
+- HtmlReport.ts : Gives html report given report content
+
+### Helper Files
+- MatchData.ts : Defines tuple data type MatchData, used for checking the data extracted is appropriate
+- MatchResult.ts : Enum defining the relationship elements within the data
+- utils.ts : Contains methods for data conversion
+  
+### Old Files
+There are old files under inheritance directory which were there when the code used inheritance (abstract class) based approach instead of Composition (interface) approach the app currently uses. Functionally, they give the same result as their Composition counterpart files.
+
+- CsvReader.ts : No longer used, previously used as parent abstract class supplying method to convert the data into usable format given csv file 
+- MatchReader.ts : No longer used, previously used as child class for converting the data into usable format given csv file 
+
 
 ## Challenge and Solution
+Challenge: Abundance of duplicate or similar looking code
+Solution: Implementation of composition based approach (interface) with classes
 
-## Functions
+- Instead of hard coded methods, created classes for data extraction & conversion & analysis so we can easily add/remove class instantiation instead of whole chunks of code.
+- Made Summary class to reference analysis & report classes, so if we have more than one analysis or reporting methods, we can always use the Summary class to delegate the task to those Analysis & Report classes. 
+
+The previous approach with abstract classes would have required creating additional parent classes to handle WinAnalysis,averageScoreAnalysis, ConsoleReport, and HtmlReport classes. 
+
+
