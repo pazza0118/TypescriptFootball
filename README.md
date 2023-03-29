@@ -72,6 +72,12 @@ There are old files under inheritance directory which were there when the code u
 - CsvReader.ts : No longer used, previously used as parent abstract class supplying method to convert the data into usable format given csv file 
 - MatchReader.ts : No longer used, previously used as child class for converting the data into usable format given csv file 
 
+### Functions
+- fs.readFileSync("football.csv", { encoding: "utf8" });	
+  - returns string of data given file path; tells fs to expect text content encoded w/ // utf8. If no encoding is given, then it returns buffer (raw data)
+- fs.writeFileSync("report.html", reportContent);
+  - Creates a file w/ given name and content
+
 
 ## Challenge and Solution
 Challenge: Abundance of duplicate or similar looking code
